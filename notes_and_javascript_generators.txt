@@ -1,0 +1,62 @@
+000 099 - left:0px; top:12672px; = 99-(99-00)*256; 99+(00)*128
+001 099 - left:256px; top:12800px; = 99-(99-01)*256; 99+(01)*128
+099 099 - left:25344px; top:25344px; = 99-(99-99)*256; (99+99)*128
+
+0nn 0mm - (99-(mm-nn))*256; (mm+nn)*128;
+
+
+000 098 - left:256px; top:12544px; = 99-(98-00)*256; 99()*128
+000 001 - left:25088px; top:128px;
+000 000 - left:25344px; top:0px; = 99-(00-00)*256; (00+00)*128
+
+
+
+099 000 - 
+
+/* 
+	to generate:
+		<img src="i/MINIMAP000000.png" title="000000" style="left:XXXpx; top:YYYpx" />
+	test formula: (nn)*256; (nn)*128
+	formula:
+	XXX = (j+(4-i))*256 ; YYY = XXX/2
+	
+	actual working formula:
+	0nn 0mm - (99-(mm-nn))*256; (mm+nn)*128;
+	
+*/
+
+//small test
+var i;
+var j;
+var XXX;
+var YYY;
+var imageshtml = "";
+for (i=4; i>=0; i--) {
+	for (j=0; j<=4; j++) {
+		var tempstring1 = String(j);
+		var tempstring2 = String(i);
+		tempstring1 = tempstring1.padStart(3, '0');
+		tempstring2 = tempstring2.padStart(3, '0');
+		XXX = (j+(4-i))*256
+		YYY = XXX/2
+		imageshtml += "<img src='i/MINIMAP"+tempstring1+tempstring2+".png' title='"+tempstring1+tempstring2+"' style='left:"+XXX+"px; top:"+YYY+"px' />";
+	}
+}
+
+//full size generator
+var i;
+var j;
+var XXX;
+var YYY;
+var imageshtml = "";
+for (i=99; i>=0; i--) {
+	for (j=0; j<=99; j++) {
+		var tempstring1 = String(j);
+		var tempstring2 = String(i);
+		tempstring1 = tempstring1.padStart(3, '0');
+		tempstring2 = tempstring2.padStart(3, '0');
+		XXX = (99-(i-j))*256;
+		YYY = (i+j)*128;
+		imageshtml += "<img src='i/MINIMAP"+tempstring1+tempstring2+".png' title='"+tempstring1+tempstring2+"' style='left:"+XXX+"px; top:"+YYY+"px' />";
+	}
+}
